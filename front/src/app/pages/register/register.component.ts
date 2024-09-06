@@ -17,13 +17,16 @@ export class RegisterComponent {
     this.form=this.fb.group({
       username:['',[Validators.email,Validators.required]],
       password:['',[Validators.maxLength(20),Validators.minLength(3),Validators.required]]
+      
     })
   }
 
   enviar(){
     const user:Login=({
       username:this.form.controls['username'].value,
-      password:this.form.controls['password'].value
+      password:this.form.controls['password'].value,
+      role:'visited',
+      status:true
     })
     this.accessServi.register(user).subscribe({
       next:(val)=>{
