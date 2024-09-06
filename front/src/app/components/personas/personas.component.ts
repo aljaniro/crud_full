@@ -62,6 +62,7 @@ export class PersonasComponent implements OnInit {
     const { id } = this.peopple();
     console.log(id, 'su id');
     const dato: Personas = {
+      id:id,
       nombre: this.form.controls['nombre'].value,
       apellido: this.form.controls['apellido'].value,
       email: this.form.controls['email'].value,
@@ -84,7 +85,8 @@ export class PersonasComponent implements OnInit {
     } else {
       this.service.updatePerson(id, dato).subscribe({
         next: (val) => {
-          console.log(val);
+          
+          console.log(val,"data tomada");
         },
         error: (error) => {
           console.log(error);

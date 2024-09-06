@@ -17,8 +17,9 @@ export class PersonService {
   getData(): Observable<any[]> {
     return this.http.get<any[]>(`${this.backend}person`).pipe(
       tap((data) => {
+        
         this.listaPerson.set(data);
-       
+       console.log(data,"desde el backend")
       }),
       catchError(this.handleError<any[]>('getData', []))
     );
@@ -39,13 +40,14 @@ export class PersonService {
   updatePerson(id: any, user: Personas): Observable<any> {
     return this.http.put<any>(`${this.backend}person/${id}`, user).pipe(
       tap((data) => {
-        this.listaPerson.update((lista) =>
-          lista.map((personas) => (personas.id === id ? user : personas))
-        );
+        console.warn(data,"esto es lo que mete")
+         this.listaPerson.update((lista) =>
+           lista.map((personas) => (personas.id === id ? user : personas))
+         );
         console.log(data, 'data del servicio');
         console.log('Datos obtenidos del backend:', this.listaPerson());
       }),
-      catchError(this.handleError<any[]>('getData', []))
+      catchError(this.handleError<any[]>('updatePerson', []))
     );
   }
 
@@ -55,7 +57,7 @@ export class PersonService {
         this.listaPerson.update((val) => [...val, user]);
         console.log('Datos obtenidos del backend:', this.listaPerson());
       }),
-      catchError(this.handleError<any[]>('getData', []))
+      catchError(this.handleError<any[]>('addperson', []))
     );
   }
   deletePersona(id: any):Observable<any> {
@@ -68,7 +70,8 @@ export class PersonService {
        
         console.log('Datos obtenidos del backend:', this.listaPerson());
       }),
-      catchError(this.handleError<any[]>('getData', []))
+      catchError(this.handleError<any[]>('deletePersona', []))
     );
   }
+ 
 }

@@ -21,24 +21,31 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of lista">
-        <td data-label="Nombre">{{ item.nombre }}</td>
-        <td data-label="Apellido">{{ item.apellido }}</td>
-        <td data-label="Email">{{ item.email }}</td>
-        <td data-label="Tipo de Documento">{{ item.tipoDocumento }}</td>
-        <td data-label="Documento">{{ item.documento }}</td>
-        <td data-label="Acciones">
-          <button
-            class="btn btn-edit"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            (click)="data(item)"
-          >
-            Editar
-          </button>
-          <button class="btn btn-delete" (click)="delete(item.id)">Eliminar</button>
-        </td>
-      </tr>
+      @for(item of lista;track item.id){
+        <tr>
+          <td data-label="Nombre">{{ item.nombre }}</td>
+          <td data-label="Apellido">{{ item.apellido }}</td>
+          <td data-label="Email">{{ item.email }}</td>
+          <td data-label="Tipo de Documento">{{ item.tipoDocumento }}</td>
+          <td data-label="Documento">{{ item.documento }}</td>
+          <td data-label="Acciones">
+            <button
+              class="btn btn-edit"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              (click)="data(item)"
+            >
+              Editar
+            </button>
+            <button class="btn btn-delete" (click)="delete(item.id)">Eliminar</button>
+          </td>
+        </tr>
+      }@empty {
+        <tr>
+          <td colspan="6"><h1>LISTA VACIA</h1></td>
+        </tr>
+      }
+    
     </tbody>
   </table>
 </div>

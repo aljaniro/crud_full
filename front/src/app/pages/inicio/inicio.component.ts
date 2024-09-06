@@ -24,7 +24,7 @@ import { PersonasComponent } from '../../components/personas/personas.component'
 export default class InicioComponent implements OnInit {
   servicesPerson = inject(PersonService);
   state: boolean = false;
-  lista: Personas[] = this.servicesPerson.listaPerson();
+  lista: Personas[] = this.servicesPerson.listaPerson()
   persons = input.required<Personas[]>;
   persona: Personas[] = [];
   prueba: Personas = {
@@ -36,31 +36,22 @@ export default class InicioComponent implements OnInit {
     fechaNacimiento: new Date(),
   };
   constructor() {
+    
     effect(() => {
       this.lista = this.servicesPerson.listaPerson();
+      console.log("cambio")
     });
   }
   ngOnInit(): void {
-    this.servicesPerson.getData().subscribe({
-      next: (val) => {
-        if (val) {
-          this.persona = val;
-        } else {
-          console.log('lista vacia');
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('completo');
-      },
-    });
+   this.recargar()
   }
   data(item: Personas) {
     this.prueba = item;
+    console.log(item)
+    console.log(this.lista)
     this.state = true;
     this.servicesPerson.changeState();
+   
   }
 
   add() {
@@ -84,5 +75,28 @@ export default class InicioComponent implements OnInit {
       },
     });;
     console.log('PROCESO DE ELIMINAR COMPLETADO');
+    this.recargar()
+  }
+
+  trackById(index: number, item: any): number {
+    return item.id;
+  }
+
+  recargar(){
+    this.servicesPerson.getData().subscribe({
+      next: (val) => {
+        if (val) {
+          this.persona = val;
+        } else {
+          console.log('lista vacia');
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('completo');
+      },
+    });
   }
 }
