@@ -18,6 +18,13 @@ export class LoginService {
     );
   }
 
+  register(user:Login):Observable<any>{
+    console.log(user)
+    return this.http.post<any>(`${this.backend}register`,user).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente o de la red
