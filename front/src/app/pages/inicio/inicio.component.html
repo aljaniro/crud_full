@@ -1,0 +1,72 @@
+<div class="table-container">
+  <div class="input-group mb-3">
+    <button
+      class="btn btn-success"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="add()"
+    >
+      ADD
+    </button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Tipo de Documento</th>
+        <th>Documento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of lista">
+        <td data-label="Nombre">{{ item.nombre }}</td>
+        <td data-label="Apellido">{{ item.apellido }}</td>
+        <td data-label="Email">{{ item.email }}</td>
+        <td data-label="Tipo de Documento">{{ item.tipoDocumento }}</td>
+        <td data-label="Documento">{{ item.documento }}</td>
+        <td data-label="Acciones">
+          <button
+            class="btn btn-edit"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="data(item)"
+          >
+            Editar
+          </button>
+          <button class="btn btn-delete" (click)="delete(item.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          FORMULARIO PERSONA
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-personas [peopple]="prueba" [estado]="state"></app-personas>
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="persona">
+    <form [formGroup]="form" (ngSubmit)="enviar()">
+      <div class="input-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" class="form-control" placeholder="Nombre" formControlName="nombre">
+      </div>
+      <div class="input-group">
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" class="form-control" placeholder="Apellido" formControlName="apellido">
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email">
+      </div>
+      <div class="input-group">
+        <label for="tipoDocumento">Tipo de Documento</label>
+        <select id="tipoDocumento" class="form-control" formControlName="tipoDocumento">
+          <option value="" disabled selected>Selecciona un tipo de documento</option>
+          <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+          <option value="Pasaporte">Pasaporte</option>
+          <option value="Licencia de Conducir">Licencia de Conducir</option>
+          <option value="Registro civil">Registro civil</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="documento">Documento</label>
+        <input type="text" id="documento" class="form-control" placeholder="Documento" formControlName="documento">
+      </div>
+      <button type="submit" class="btn btn-primary"data-bs-dismiss="modal">Enviar</button>
+    </form>
+  </div>
+  
