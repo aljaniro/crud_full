@@ -68,7 +68,21 @@ export default class InicioComponent implements OnInit {
   }
 
   delete(id: any) {
-    this.servicesPerson.deletePersona(id);
+    this.servicesPerson.deletePersona(id).subscribe({
+      next: (val) => {
+        if (val) {
+          this.persona = val;
+        } else {
+          console.log('lista vacia');
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('completo el delete');
+      },
+    });;
     console.log('PROCESO DE ELIMINAR COMPLETADO');
   }
 }

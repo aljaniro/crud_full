@@ -58,11 +58,17 @@ export class PersonService {
       catchError(this.handleError<any[]>('getData', []))
     );
   }
-  deletePersona(id: any) {
+  deletePersona(id: any):Observable<any> {
+    console.log(id)
     this.listaPerson.update((personas) =>
       personas.filter((persona) => persona.id !== id)
     );
-    this.http.delete(`${this.backend}person/${id}`);
-    catchError(this.handleError<any[]>('getData', []));
+   return this.http.delete<any>(`${this.backend}person/${id}`).pipe(
+      tap((data) => {
+       
+        console.log('Datos obtenidos del backend:', this.listaPerson());
+      }),
+      catchError(this.handleError<any[]>('getData', []))
+    );
   }
 }
